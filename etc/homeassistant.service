@@ -1,0 +1,16 @@
+[Unit]
+Description=Homeassistant Service
+After=network-online.target
+Description=Homeassistant Docker Appliance Service
+Documentation=man:homeassistant-docker(8)
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+Environment=HA_DOCKER_CONFIG=/etc/homeassistant.conf
+WorkingDirectory=/var/tmp
+ExecStart=/usr/bin/homeassistant-docker start
+ExecStop=/usr/bin/homeassistant-docker stop
+
+[Install]
+WantedBy=multi-user.target

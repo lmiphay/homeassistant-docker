@@ -1,0 +1,57 @@
+#!/bin/bash
+
+ha_version=${ha_version:-"2021.9"}
+
+ha_image=${ha_image:-"ghcr.io/home-assistant/home-assistant"} # alt docker hub: homeassistant/home-assistant
+
+ha_hostname=${ha_hostname:-"homeassistant"}
+
+ha_config=${ha_config:-/homeassistant/config}
+ha_tz=${ha_tz:-Europe/Dublin} # Australia/Melbourne...etc, see: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+ha_extra_config=${ha_extra_config:-""} # e.g. "--device /dev/ttyUSB0:/dev/ttyUSB0 --device /dev/ttyACM0:/dev/ttyACM0" ... etc
+
+HA_DOCKER_CONFIG=${HA_DOCKER_CONFIG:-/etc/homeassistant.conf}
+
+if [ -n "${HA_DOCKER_CONFIG}" -a -f "${HA_DOCKER_CONFIG}" ] ; then source "${HA_DOCKER_CONFIG}" ; fi
+
+case "$1" in
+    pull)
+	docker pull "${ha_image}:${ha_version}"
+	;;
+    create)
+	docker create \
+	       --name homeassistant \
+	       --hostname "${ha_hostname}" \
+	       --privileged \
+	       --restart=unless-stopped \
+               -network=host \
+	       -v "${ha_config}":"/config":rw \
+	       -e "TZ=${ha_tz}" \
+	       -v "/etc/localtime":"/etc/localtime":ro \
+	       -v "/etc/timezone":"/etc/timezone":ro \
+	       -v "/etc/ssl":"/etc/ssl":ro \
+	       "${ha_image}:${ha_version}"
+	;;
+    start|run)
+	[ ! -d "${ha_config}" ] && mkdir -p "${ha_config}"
+	docker start homeassistant
+	echo "listening on http://${HOSTNAME}:8123"
+	;;
+    stop)
+	docker stop homeassistant
+	;;
+    delete|rm)
+	docker rm homeassistant
+	;;
+    logs)
+	docker logs -f homeassistant
+	;;
+    settings)
+	set | egrep '^ha_' | sort
+	;;
+    *)
+	echo "Usage: $(basename $0) {pull|create|start|stop|delete|logs|settings}"
+	;;
+esac
+
+exit 0
