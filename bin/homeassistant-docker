@@ -24,7 +24,7 @@ case "$1" in
 	       --hostname "${ha_hostname}" \
 	       --privileged \
 	       --restart=unless-stopped \
-               -network=host \
+               --network=host \
 	       -v "${ha_config}":"/config":rw \
 	       -e "TZ=${ha_tz}" \
 	       -v "/etc/localtime":"/etc/localtime":ro \
