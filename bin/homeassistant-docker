@@ -1,14 +1,19 @@
 #!/bin/bash
 
-ha_version=${ha_version:-"2021.9"}
+ha_version=${ha_version:-"2021.9.7"}
 
-ha_image=${ha_image:-"ghcr.io/home-assistant/home-assistant"} # alt docker hub: homeassistant/home-assistant
+# alt docker hub: homeassistant/home-assistant
+ha_image=${ha_image:-"ghcr.io/home-assistant/home-assistant"}
 
 ha_hostname=${ha_hostname:-"homeassistant"}
 
 ha_config=${ha_config:-/homeassistant/config}
-ha_tz=${ha_tz:-Europe/Dublin} # Australia/Melbourne...etc, see: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-ha_extra_config=${ha_extra_config:-""} # e.g. "--device /dev/ttyUSB0:/dev/ttyUSB0 --device /dev/ttyACM0:/dev/ttyACM0" ... etc
+
+# Australia/Melbourne...etc, see: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+ha_tz=${ha_tz:-Europe/Dublin}
+
+# e.g. "--device /dev/ttyUSB0:/dev/ttyUSB0 --device /dev/ttyACM0:/dev/ttyACM0" ... etc
+ha_extra_config=${ha_extra_config:-""}
 
 HA_DOCKER_CONFIG=${HA_DOCKER_CONFIG:-/etc/homeassistant.conf}
 
