@@ -35,12 +35,13 @@ case "$1" in
 	       -e "TZ=${ha_tz}" \
 	       -v "/etc/localtime":"/etc/localtime":ro \
 	       -v "/etc/timezone":"/etc/timezone":ro \
+	       ${ha_extra_config} \
 	       "${ha_image}:${ha_version}"
 	;;
     start|run)
 	[ ! -d "${ha_config}" ] && mkdir -p "${ha_config}"
 	docker start homeassistant
-	echo "listening on http://${HOSTNAME}:8123"
+	echo "listening on http://${HOSTNAME}:{{ http.server_port }}"
 	;;
     stop)
 	docker stop homeassistant
