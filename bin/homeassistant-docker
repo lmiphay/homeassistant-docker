@@ -35,7 +35,6 @@ case "$1" in
 	       -e "TZ=${ha_tz}" \
 	       -v "/etc/localtime":"/etc/localtime":ro \
 	       -v "/etc/timezone":"/etc/timezone":ro \
-	       -v "/etc/ssl":"/etc/ssl":ro \
 	       "${ha_image}:${ha_version}"
 	;;
     start|run)
