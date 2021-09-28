@@ -40,3 +40,4 @@ rc-config add homeassistant
 2. https://www.home-assistant.io/installation/linux#install-home-assistant-container
 3. https://github.com/home-assistant/core/pkgs/container/home-assistant/versions
 4. https://hub.docker.com/r/homeassistant/home-assistant
+5. https://community.home-assistant.io/t/gentoo-homeassistant-0-59-2-ebuild/35577
