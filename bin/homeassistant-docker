@@ -50,7 +50,7 @@ case "$1" in
 	docker rm homeassistant
 	;;
     logs)
-	docker logs -f homeassistant
+	docker logs -n 1000 -f homeassistant
 	;;
     settings)
 	set | egrep '^ha_' | sort
