@@ -82,6 +82,7 @@ $ homeassistant-docker settings
 ...
 $ homeassistant-docker pull
 $ homeassistant-docker create
+...
 $ homeassistant-docker start
 $ homeassistant-docker logs
 ...
@@ -89,6 +90,17 @@ $ homeassistant-docker stop
 ...
 $ homeassistant-docker delete
 ```
+
+The pull and create should only be done once per version bump.
+After that the container can be started and stopped as required.
+
+## Upgrade
+
+1. homeassistant-docker stop
+2. homeassistant-docker pull
+3. docker rename homeassistant homeassistant-2021.9.7
+4. homeassistant-docker create
+5. homeassistant-docker start
 
 ## OpenRC
 
