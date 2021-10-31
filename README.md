@@ -96,6 +96,8 @@ After that the container can be started and stopped as required.
 
 ## Upgrade
 
+After installing or updating `homeassistant-docker`:
+
 1. homeassistant-docker stop
 2. homeassistant-docker pull
 3. docker rename homeassistant homeassistant-2021.9.7
@@ -108,6 +110,22 @@ To have the container start automatically:
 
 ```
 rc-config add homeassistant
+```
+
+## Logging
+
+The default docker "json-file" logging driver does *not* do log rotation.
+
+To select the "local" driver, with a max file size of 10MB and four files, add this to `/etc/docker/daemon.json`:
+
+```json
+{
+  "log-driver": "local",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "4"
+  }
+}
 ```
 
 ## References
