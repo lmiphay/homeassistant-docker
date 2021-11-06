@@ -104,6 +104,11 @@ After installing or updating `homeassistant-docker`:
 4. homeassistant-docker create
 5. homeassistant-docker start
 
+Optional - to remove an old image and/or container:
+
+6. docker rm homeassistant-2021.9.7
+7. docker rmi ghcr.io/home-assistant/home-assistant:2021.9
+
 ## OpenRC
 
 To have the container start automatically:
