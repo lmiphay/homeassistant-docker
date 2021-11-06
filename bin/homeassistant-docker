@@ -20,6 +20,20 @@ HA_DOCKER_CONFIG=${HA_DOCKER_CONFIG:-/etc/homeassistant.conf}
 
 if [ -n "${HA_DOCKER_CONFIG}" -a -f "${HA_DOCKER_CONFIG}" ] ; then source "${HA_DOCKER_CONFIG}" ; fi
 
+waitfordockerd()
+{
+    for (( count=1; count<=15; count++ )) ; do
+	if docker version >/dev/null 2>&1 ; then
+	    return
+	else
+	    echo "waiting for docker daemon to start"
+	    sleep 1
+	fi
+    done
+    echo "timed out waiting for docker daemon to start"
+    exit 1
+}
+
 case "$1" in
     pull)
 	docker pull "${ha_image}:${ha_version}"
@@ -40,6 +54,7 @@ case "$1" in
 	;;
     start|run)
 	[ ! -d "${ha_config}" ] && mkdir -p "${ha_config}"
+	waitfordockerd
 	docker start homeassistant
 	echo "listening on http://${HOSTNAME}:{{ http.server_port }}"
 	;;
