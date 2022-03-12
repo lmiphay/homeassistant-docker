@@ -100,11 +100,11 @@ After installing or updating `homeassistant-docker`:
 
 1. homeassistant-docker stop
 2. homeassistant-docker pull
-3. docker rename homeassistant homeassistant-2021.9.7
+3. docker rename homeassistant homeassistant-2021.9.7 # renames the old container
 4. homeassistant-docker create
 5. homeassistant-docker start
 
-Optional - to remove an old image and/or container:
+Optional - to remove an old container and/or image:
 
 6. docker rm homeassistant-2021.9.7
 7. docker rmi ghcr.io/home-assistant/home-assistant:2021.9
