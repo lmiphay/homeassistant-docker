@@ -64,8 +64,8 @@ case "$1" in
     delete|rm)
 	docker rm homeassistant
 	;;
-    logs)
-	docker logs -n 1000 -f homeassistant
+    log*)
+	docker logs -n 1000 -f homeassistant 2>&1
 	;;
     settings)
 	set | egrep '^ha_' | sort
