@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ha_version=${ha_version:-"2022.3.3"}
+ha_version=${ha_version:-"2022.5"}
 
 # alt docker hub: homeassistant/home-assistant
 ha_image=${ha_image:-"ghcr.io/home-assistant/home-assistant"}
